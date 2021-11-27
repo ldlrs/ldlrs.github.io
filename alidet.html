@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>alidet.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="ladrillos-ecol%C3%B3gicos">LADRILLOS ECOLÓGICOS</h1>
+<h2 id="introducci%C3%B3n">INTRODUCCIÓN</h2>
+<p>Aunque al principio, los plásticos fueron vistas como una buena opción para sustituir otros materiales ya que entre las propiedades que posee se encuentra la ligereza, resistencia, transparencia y costo, en la actualidad representa un grave peligro ambiental debido a las malas prácticas de disposición final. Sólo en México se produce 300 millones de toneladas de plástico al año de las cuales el 3% se recicla, es por esto que se necesita innovar formas de reutilización de estos productos, dando así un segundo uso al plástico.
+El mundo actual atraviesa una crisis ambiental, esto se debe a la contaminación que se genera por la mala aplicación de los residuos plásticos, lo cual conlleva a la necesidad de emplear nuevas ideas para el cuidado del medio ambiente en los distintos tipos de sectores, con el fin de presentar productos que sean amigables con el planeta.
+El sector de la construcción es el motor del desarrollo económico, el crecimiento de este sector hace que los materiales constructivos estén en constante innovación, al igual que sea uno de los principales contaminantes ambientales, al tener estas condiciones, debemos de plantear nuevas ideas que permita ayudar en especial a este sector, estas deben responder a poder elaborar estructuras más eficientes con métodos ecológicamente responsables dando cabida a la bioconstrucción o a la arquitectura ecológica.
+La bio-construcción es una disciplina dentro del mundo de la arquitectura y de la edificación, esta busca la integración del edificio en el entorno, dando así una alternativa que ayude a ambos sectores, haciendo uso del plástico reciclado como materia prima principal, brindando así un nuevo uso y alargando su vida útil.
+Uno de los principales objetivos de este proyecto es ofrecer una alternativa frente a los materiales de construcción convencionales. La idea es que se desarrolle una pieza constructiva que evite la emisión de CO2 a la atmósfera, lo que se pretende es dar un nuevo uso a los materiales plásticos, esto se realizará utilizándolo como materia prima para la elaboración del ladrillo, esto conlleva a la reducción de un gran impacto ambiental, ya que el plástico es un producto con mayor índice de desechos y contaminación a nivel mundial.
+Se apuesta por una nueva propuesta sostenible, esta pretende dar nuevas ideas a las soluciones planteadas hasta el momento, se toma conciencia del agotamiento de los recursos naturales al elaborar ladrillos que no sean sostenibles, tomando en cuenta esta problemática se pretende desarrolla una visión más sostenible y ecológica.
+La finalidad de este proyecto es poder concientizar la existencia de maneras en que se puede desarrollar una vida más sostenible. Para ello es necesario conseguir el mínimo impacto en la naturaleza para así generar espacios interiores que se convierten en la tercera piel del humano y a la vez, se pretende tener otro enfoque en la construcción sostenible.</p>
+<h2 id="planteamiento-del-problema">PLANTEAMIENTO DEL PROBLEMA</h2>
+<p>El plástico, en especial es de los envases destinados a bebida, genera grandes toneladas de basura diaria, siendo actualmente el primer material de desecho que más se acumula en nuestras ciudades. Una problemática aumenta cuando se tiene en cuenta que se trata de un material que tarda alrededor de 500 años en degradarse por completo.
+Actualmente existe gran cantidad de residuos plásticos a lo largo de México, del cual el 50% se recicla, el resto de este termina en las calles, en el mar, ríos y lagos. Reciclar es una actividad demasiado sencilla que se puede llevar a cabo, por la razón presentada al principio, es necesario reciclar de todas las maneras posibles, ya sea dando un nuevo uso o llevarlo a las empresas que se encargan del reciclaje.
+Los incrementos de construcciones sostenibles han llevado al auge para desarrollar estos nuevos productos y tener viabilidad a un corto plazo ya que no hay demasiadas fuentes de ladrillo ecológico y son un insumo principal para las construcciones.
+El surgimiento de nuevas estrategias en el sector de la construcción hace que se innoven ideas que sean accesibles con el mundo moderno, estas deben de tener un impacto ambiental positivo y que a la vez mantenga los parámetros de calidad que existen en el campo.
+En los últimos años el desarrollo de ideas en el uso y reciclado de las botellas PET se ha visto incrementado nivel mundial debido al nivel del problema ecológico que supone. Por lo tanto, es necesario comenzar a experimentar con nuevos materiales de construcción como los ladrillos ecológicos. El implemento del ladrillo ecológico surge como una opción de las empresas del sector para mejorar la calidad del desarrollo de viviendas, siendo su uso un aporte favorable a las necesidades sociales, económicas y ambientales de este sector.
+Según cifras presentadas por el Directorio de Estadísticas Nacional de Unidades Económicas, los Estados Unidos Mexicanos registraron hasta mayo de 2021 más de 5.5 millones de unidades económicas, de las cuales 27 305 compiten en la rama de la construcción (anexo 1), este monto lleva a suponer la importancia de permanecer a la vanguardia del mercado para poder ser capacitado con los nuevos desafíos que se presenten.
+Los ladrillos de plástico son indudablemente mejores que sus contrapartes de piedra, grava y arena, ya que aparte de lograr almacenar todo el exceso de plástico de una manera eficiente y efectiva, se podrá eliminar las emisiones de CO2 al momento de fabricar cemento y ladrillos. El ladrillo ecológico que se propone utilizará como materia prima el plástico, este tiene características que le dará un peso muy liviano, genera un valor agregado por su peso, aunque presenta buena resistencia, pero se consideró viable para construcciones que tengan ciertas características donde no influyan vientos fuertes.</p>
+<h2 id="justificaci%C3%B3n-de-la-investigaci%C3%B3n">JUSTIFICACIÓN DE LA INVESTIGACIÓN</h2>
+<p>La explotación de recursos naturales genera un impacto negativo en el medio ambiente, gran parte de estos recursos son utilizados para diversos materiales de la vida cotidiana de las personas, pero de igual manera para la elaboración de materiales para la construcción. El sector de la construcción ha tenido mayor crecimiento en los últimos años, los retos que se asumen a diario son cada vez más grandes, se presentan problemáticas como la competencia entre empresas, los costos en los materiales y el aumento de los índices de contaminación que conlleva a esta industria.
+La Secretaría del Medio Ambiente y Recursos ha declarado que sólo en la Ciudad de México se sacan 13 mil toneladas de basura, de las cuales cerca de 2 000 toneladas son botellas plásticas. México es líder en el continente americano en acopio y reciclaje de PET, con el 50.4% del material reutilizado y con 14 empresas recicladoras. Sin embargo, esto no es suficiente ya que esto va de la mano con los malos hábitos que se tiene. Por tanto, la generación de plásticos es uno de los mayores problemas, ya que si no se recolectan y gestionan adecuadamente seguirá contaminando y afectando a los sistemas de aguas y ecosistemas.
+Los incrementos de construcciones sostenibles han llevado a la innovación de nuevos productos y tener viabilidad a un corto plazo, ya que no hay demasiadas fuentes de ladrillo ecológico y son un insumo principal para las construcciones sostenibles. Para afrontar estas dificultades es necesario buscar nuevas estrategias de innovación que permitan a las empresas ser competitivas en el mercado actual, mejorando sus tiempos y teniendo un impacto ambiental positivo.
+Se desea generar un cambio positivo, disminuir el impacto ambiental y disminuir los tiempos de producción y elaboración de las construcciones, por medio de la producción automatizada de ladrillos ecológicos elaborados con plástico reciclado. El ladrillo ecológico nace con el ánimo de aportar un granito de arena y así reducir la contaminación del medio ambiente, buscando optimizar los materiales plásticos de reciclaje, de esta forma aprovecharemos las propiedades de los materiales que se emplean como sustituto los materiales requeridos para la elaboración de un ladrillo tradicional. Si bien no podemos decir que con esta idea no habrá más contaminación, podemos decir que se disminuirá significativamente el porcentaje de erosión y explotación de los suelos que es de dónde se obtiene el 100% de materia prima utilizada para la elaboración del ladrillo.
+La automatización en la elaboración de ladrillos ecológicos responde a las necesidades de disminuir el tiempo en la elaboración de espacios arquitectónicos y disminuir el impacto ambiental, ya que como se ha dicho anteriormente el ladrillo que se propone es un ladrillo ecológico hecho con plástico reciclado y pegamento ecológico hecho a base agua, esto aporta un peso muy ligero al ladrillo, es resistente, impermeable, su fabricación es económica en comparación de los ladrillos convencionales, al igual que pele mejor la humedad y el calor e incrementa hasta 65 años el promedio de vida de las casas.</p>
+<h2 id="hip%C3%B3tesis">HIPÓTESIS</h2>
+<p>La automatización en la elaboración de ladrillos ecológicos tiene un impacto positivo en el sector de la construcción y en el medio ambiente, es una idea innovadora que tiene un gran beneficio para el medio ambiente ya que su elaboración será con botellas de plástico recicladas y pegamento ecológico hecho a base de agua, esto reduce los costos en materia prima en comparación de los ladrillos convencionales, al tener un ladrillo hecho con materiales plásticos se obtiene cualidades que hacen a este ladrillo ligero, resistente a la intemperie y resistente a productos químicos, se pretende que el ladrillo ecológico tenga las mismas características de un ladrillo convencional, así como reducir tiempos en la construcción y obviamente ayudar al planeta.
+La finalidad de este proyecto es aprovechar y reutilizar residuos plásticos para ayudar al medio ambiente alargando el uso del plástico y evitando así que termine en océanos, áreas verdes, etc. Con la implementación de los ladrillos ecológicos se espera concientizar al sector de la construcción sobre la preservación de ecosistemas, dándoles a conocer las ventajas de implementar esta idea, con el fin de lograr una sostenibilidad ecológica, beneficiando el medio en que se desempeña.</p>
+<h2 id="objetivos-de-la-investigaci%C3%B3n">OBJETIVOS DE LA INVESTIGACIÓN</h2>
+<h3 id="objetivo-general">Objetivo general</h3>
+<p>Concientizar al sector de la construcción para que en las obras implementen materiales ecológicos con el fin de reducir el impacto ambiental negativo, mejorando así los tiempos de construcción y haciéndolos más factibles, al igual de concientizar a la población a llevar una vida sustentable.</p>
+<h3 id="objetivos-espec%C3%ADficos">Objetivos específicos</h3>
+<ul>
+<li>Impulsar la bio-construcción.</li>
+<li>Contribuir a la conservación del medio ambiente.</li>
+<li>Mejorar la producción de ladrillos ecológicos.</li>
+<li>Dar un nuevo uso a las botellas de plástico.</li>
+<li>Reducir la explotación al medio ambiente en la obtención de materia prima.</li>
+<li>Obtener las mismas características de un ladrillo convencional</li>
+</ul>
+<h2 id="marco-te%C3%B3rico">MARCO TEÓRICO</h2>
+<p>Los ladrillos utilizados convencionalmente están hechos con cemento, arena y agregados pétreos, esto se ha hecho así desde 1824, cuando el inglés Joseph Aspdin desarrolló el cemento Portland (Cavette, 2007)
+Cada vez son más las iniciativas ecológicas que intentan reinventar o reemplazar los ladrillos tradicionales utilizando materiales sostenibles, propiciando una sostenibilidad o compensando la huella de carbono actuando como un aislante de la casa (Isan, 2018).
+Los investigadores del Consejo Nacional de Investigaciones Científicas y Técnicas (CONICET) de Argentina crearon un ladrillo que se fabrica a base de residuos de botellas de plástico. Para fabricarlo se utiliza polietileno-tereftalato (PET), en combinación con cemento Portland, más un aditivo químico que mejora la adherencia de las partículas al cemento (Cruz, 2019).
+Conceptos Plásticos crearon el sistema Brickarp, pretende reducir el costo de la vivienda y hacerla accesible. Para fabricarlo se utiliza residuos sólidos plásticos principalmente polietileno de alta y baja densidad y polipropileno, en menor proporción se utilizan policarbonatos y poliestirenos y otros tipos de plásticos como PET, PVC y ABS (Paiz, 2016). El proceso se basa en triturar el plástico, derretirlo, inyectarlo en los moldes, enfriarlos y desmoldarlos (Petro, 2013). Para fabricar un kilo de plástico reciclado se libera 1.7 kg de CO2. Aunque se ayuda al ambiente utilizando materia prima reciclada, el dióxido de carbono emitido contamina a la atmósfera (Z.E.O, 2020).
+El Instituto Nacional de Estadística y Geografía (INEGI) menciona que cerca de 1 millón de viviendas están con material en deterioro, esto genera un crecimiento exponencial de demanda, lo que implica la necesidad de mayor cantidad de recursos naturales para la elaboración de material para construcción, esto implica la explotación de recursos y contaminación (La Jornada, 2013).
+Uno de los materiales plásticos que causa un gran daño al ambiente es el polietileno-tereftalato (PET), el cual sirve para hacer empaques, láminas y botellas, este puede tardar hasta 100 años para degradarse. Sin embargo, debido a su reciclaje se pueden producir otros bienes, conservando sus propiedades (Gutiérrez, 2015).
+La industria del reciclaje plástico en Latinoamérica es un negocio que empieza a crecer y que tiene amplias expectativas a futuro debido al giro mundial hacia la reutilización de productos plásticos como nueva materia prima y al crecimiento de políticas que van forjando el camino hacia la reutilización de materiales como una responsabilidad para productores y consumidores (Tecnología del plástico, 2020).
+Es de gran importancia generar un producto que tenga mayor vida útil, que no se convierta en basura tan rápido, que su elaboración sea rápida, se busca mejorar los tiempos de construcción y tener el mínimo impacto negativo en el ambiente (Mireya Gareca, 2020).
+La eco-arquitectura no resolverá por completo los problemas ambientales del mundo, pero contribuirá significativamente a todos los ingenieros, arquitectos y diseñadores para lograr el cambio a través de la utilización de materiales locales (lo cual evitará la producción de CO2, además favorecerá el desarrollo de la industria local, ayudará al ambiente ya que se utiliza como materia prima los plásticos reciclados, creando así ladrillos de materiales duraderos (Fuente, 2017).</p>
+<h2 id="planeaci%C3%B3n-y-desarrollo-del-proyecto">PLANEACIÓN Y DESARROLLO DEL PROYECTO</h2>
+<p>Para llevar a cabo este proyecto se necesitó planear ciertas actividades para su correcto desarrollo, estas se muestran en la siguiente tabla.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Actividad</th>
+<th style="text-align:center">Explicación de la actividad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Investigar problemáticas</td>
+<td style="text-align:center">Investigar las problemáticas que tengan que ver con la explotación al medio ambiente en la obtención de materia prima.</td>
+</tr>
+<tr>
+<td style="text-align:center">Investigación acerca del tema</td>
+<td style="text-align:center">Ya que se eligió la problemática, se debe de investigar a fondo para así poder realizar el prototipo.</td>
+</tr>
+<tr>
+<td style="text-align:center">Investigar los requerimientos para que un proyecto sea sustentable</td>
+<td style="text-align:center">Investigar que debe de tener un proyecto para que sea considerado como sustentable.</td>
+</tr>
+<tr>
+<td style="text-align:center">Elaboración de la idea</td>
+<td style="text-align:center">Investigar sobre el tema a tratar, se debe de tener una idea para el prototipo a realizar.</td>
+</tr>
+<tr>
+<td style="text-align:center">Investigar materia prima</td>
+<td style="text-align:center">Investigar que los materiales a utilizar debe de ser materiales amigables con el planeta o materiales reciclados.</td>
+</tr>
+<tr>
+<td style="text-align:center">Elaboración del boceto del prototipo</td>
+<td style="text-align:center">Elaboración del boceto del prototipo, esto con el fin de que si se necesita hacer ajustes al diseño la idea base no se cambie por olvidar alguna parte que podría ser importante.</td>
+</tr>
+<tr>
+<td style="text-align:center">Identificar los componentes electrónicos que se utilizaran</td>
+<td style="text-align:center">Al tener la idea se necesita elaborar una pequeña lista con los componentes que se necesitará para que el prototipo funcione.</td>
+</tr>
+<tr>
+<td style="text-align:center">Elaboración del prototipo</td>
+<td style="text-align:center">Elaborar el diseño 3D, la simulación del circuito, la placa PCB y la programación.</td>
+</tr>
+<tr>
+<td style="text-align:center">Revisar el proyecto</td>
+<td style="text-align:center">Ya que se tiene todo hecho, se debe de revisar todo el proyecto por si se omitió algo, si ese el caso se debe agregarlo.</td>
+</tr>
+</tbody>
+</table>
+<p>El diseño de la automatización en la elaboración de ladrillos ecológicos consta de varias etapas tanto de diseño de piezas mecánicas para lograr que la materia prima pase por los procesos necesarios, así como las etapas de control que permite manejar los diferentes procesos que pasará la materia prima, estas etapas se muestran en los siguientes diagramas:</p>
+<p><a href="https://drive.google.com/file/d/1FSzWy_vgehGV3s67oZSR2KNgh2IjJpOY/view?usp=sharing" title="Diagrama del desarrollo del proyecto">Desarollo del prototipo</a></p>
+<p><a href="https://drive.google.com/file/d/1eSc2DFGwiwl1p2DsMR8YNZTu05bwY2aH/view?usp=sharing" title="Diagrama del proceso de elaboración">Procesos de elaboración</a></p>
+<h2 id="grado-de-innovaci%C3%B3n">GRADO DE INNOVACIÓN</h2>
+<p>La automatización en la elaboración de ladrillos ecológicos está orientado al sector de la construcción, ya que puede obtener beneficios al implementar esta idea, así como ayudan al medio ambiente. Teniendo esta idea, la automatización en la elaboración de ladrillos ecológicos a partir de plástico reciclado, propone otra manera más ecológica y rápida de cómo puede ser su elaboración.
+Actualmente existen industrias que derriten el plástico reciclado para elaborar nuevos ladrillos de construcción, los gases emitidos se utilizan en la pirolisis, esto con el fin de utilizar combustible térmico para que la industria funcione, al realizar todo este proceso se gasta tiempo y dinero, esto debido a que en el proceso se utiliza  personal para realizar cierto tipo de tareas, como incorporar los tipos de plásticos que se utilizan, llevarlos a la tolva para después derretirlos, controlar el proceso de inyección del producto a los moldes, entre otras.
+Al realizar algunos ajustes a la idea planteada anteriormente, hará que la elaboración sea más rápida, también que se utilice como materia prima otro material ecológico y evitará que el personal sufra algún tipo de daño (ya sea alguna quemadura, fractura, etc). Se implementará sensores de presencia para que detenga la trituración cuando el contenedor este por llegar a su máxima capacidad y así evitar que el producto se desperdicie, también en lugar de derretir el plástico reciclado, se mezclará con un pegamento ecológico hecho a base de agua, cuando se tenga la mezcla se pasará al molde del ladrillo, en el que se esperará a que se seque para después poder retirarlo y continuar el mismo proceso una y otra vez, la mayoría de este proceso será automatizado, para ello se utilizara actuadores, estos estarán programados para que cumplan con la función que se necesita realizar.</p>
+<h2 id="factibilidad-t%C3%A9cnica-y-financiera">FACTIBILIDAD TÉCNICA Y FINANCIERA</h2>
+<p>Por cuestiones de pandemia y debido a que el diseño es algo extenso, el diseño de la parte mecánica tanto de la parte electrónica se elaborará en softwares los cuales son FreeCAD, TinkerCAD, Arduino y KiCAD.
+Para el sistema de control se utilizó Arduino, es una aplicación multiplataforma que está escrita en el lenguaje de programación Java. El microcontrolador que se utilizará será Arduino UNO ATmega328. Para el control de los motores dc y del motorreductor se utilizó el Driver L293D.
+Este prototipo es una buena inversión en cuanto al gran porcentaje de factibilidad que a largo plazo se obtendrá beneficios monetarios y ecológicos, contemplando así el desarrollo del prototipo.
+Recalcando que su finalidad nace de reducir la contaminación del medio ambiente buscando de igual manera optimizar otras ciertas variables de reducción de la contaminación.
+Tomemos en cuenta que este prototipo tendrá un gran porcentaje significativo de impacto por lo innovación que llega a tener, recalcando que gracias a proyectos como este es que en la actualidad ingenieros y arquitectos están implementando las construcciones sostenibles.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Artículo</th>
+<th style="text-align:center">Tienda</th>
+<th style="text-align:center">Precio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Trituradora de plástico</td>
+<td style="text-align:center">Mercado libre Mercado libre</td>
+<td style="text-align:center">$4443.55 $2140.98</td>
+</tr>
+<tr>
+<td style="text-align:center">Banda transportadora</td>
+<td style="text-align:center">Mercado libre Mercado libre</td>
+<td style="text-align:center">$18,000 $75,000</td>
+</tr>
+<tr>
+<td style="text-align:center">Mezcladora</td>
+<td style="text-align:center">Mercado libre</td>
+<td style="text-align:center">$66,081.6 $142,319.28</td>
+</tr>
+<tr>
+<td style="text-align:center">Tolvas dosificadoras</td>
+<td style="text-align:center">Mercado libre</td>
+<td style="text-align:center">$35,413.2 $34363.44</td>
+</tr>
+<tr>
+<td style="text-align:center">Sensor de proximidad</td>
+<td style="text-align:center">Mercado libre</td>
+<td style="text-align:center">$125</td>
+</tr>
+<tr>
+<td style="text-align:center">Poleas Poleas paquete de 10</td>
+<td style="text-align:center">Mercado libre Amazon</td>
+<td style="text-align:center">$218.11 $664.31</td>
+</tr>
+<tr>
+<td style="text-align:center">Moldes</td>
+<td style="text-align:center">Mercado libre</td>
+<td style="text-align:center">$3150 $1850</td>
+</tr>
+<tr>
+<td style="text-align:center">PET post-consumo a granel mixto (kg)</td>
+<td style="text-align:center">Recimex</td>
+<td style="text-align:center">$6.44</td>
+</tr>
+<tr>
+<td style="text-align:center">Tyrocol Aglomerante AM/I</td>
+<td style="text-align:center">Insoco</td>
+<td style="text-align:center">No disponible</td>
+</tr>
+</tbody>
+</table>
+<h2 id="impacto-social-o-tecnol%C3%B3gico-yo-desarrollo-sustentable">IMPACTO SOCIAL O TECNOLÓGICO Y/O DESARROLLO SUSTENTABLE</h2>
+<p>La aplicación de los ladrillos ecológicos hechos con botellas de plástico, generará mejoras tanto al medio ambiente como a las personas y al sector de la construcción. Ayudará al ambiente ya que, al darle un segundo uso al plástico este no terminará en los mares y áreas ecológicas, a las personas les dará ventajas al construir viviendas ya que obtendrán los mismos beneficios de un ladrillo convencional (anexo 2) pero con un costo más bajo y también ayudará a que no haya tanto plástico en las calles, en cuanto al sector de la construcción, este ayuda a impulsar la bio-construcción, aparte de que mejorará los tiempos de construcción en las obras que implementen este ladrillo.
+El ladrillo ecológico que se presenta no tiene proceso de cocción como los ladrillos convencionales. Este tipo de fabricación, requiere alcanzar altas temperaturas por el uso de combustible, y al fundirse liberan grandes cantidades de CO2. Este tipo de fabricación puede provocar enfermedades respiratorias o dermatológicas, es por esta razón que las industrias fabricantes debe de estar lejos de las áreas urbanas.
+Sustituir el cemento como materia prima en la elaboración de ladrillos es una buena opción, ya que puede contener metales pesados tales como el níquel, cobalto, plomo y cromo, estos metales son contaminantes peligrosos para el ambiente, al igual que tiene un impacto negativo para la salud vegetal, animal y humana.
+Al elaborar los ladrillos ecológicos de forma automatizada, provocará cambios en la elaboración de los ladrillos, los cuales serán que se podrá producir más ladrillos en un periodo de tiempo corto (en comparación con los ladrillos convencionales y con otros ladrillos ecológicos), con el fin de reducir el riesgo laboral y de esta forma evitar poner en riesgo al personal, el proceso en la elaboración del ladrillo, será automatizado, a consecuencia de esto, el personal no tendrá tanto contacto en alguna etapa de la elaboración del ladrillo, aparte que los procesos que pasará el ladrillo al momento de su elaboración, no serán tan riesgosos, esto evitará algún accidente al personal.
+El prototipo propone la aplicación de tecnologías de control y programación, para esto se utiliza como microcontrolador Arduino UNO, el lenguaje de programación que se utiliza es Arduino, este lenguaje está basado en un lenguaje de llamado Wiring (escrito en lenguaje C y C++) tiene un código abierto para la programación de microcontroladores.
+La tarjeta de Arduino no se necesita controlar específicamente con el lenguaje propio, existen otros lenguajes en los que se puede controlar, tales como Python, Sketch, C, ArduBlock, entre otros. Esto da ventajas ya que, al programarlo con otro lenguaje, aparte de aprender un nuevo lenguaje de programación, podemos desarrollar más ideas que van desde ayudar a mejorar algún proceso hasta innovar algún proyecto interesante y/o que sea capaz de ayudar al cuidado y la preservación medio ambiente.</p>
+<h2 id="an%C3%A1lisis-de-resultados">ANÁLISIS DE RESULTADOS</h2>
+<p>De acuerdo al objetivo general del proyecto que es la automatización en la elaboración de ladrillos ecológicos y buscando una alternativa sustentable en el campo de la construcción, el aporte que brinda este trabajo es proporcionar un campo tecnológico y ambiental seguro, ya que el proyecto se centra en el desarrollo de ladrillos ecológicos hechos con plástico reciclado.
+Se logró obtener un producto que cumple con las especificaciones del material que se ocupa tradicionalmente, se logró tener una alternativa atractiva al sector de construcción, al tener un proceso automatizado ayuda a mejor los tiempos de fabricación, así como también ahorra personal. Al utilizar material reciclado como materia prima, se beneficia al ambiente ya que no explotas los recursos naturales que este nos ofrece y así la contaminación de desechos plásticos disminuye.
+Los resultados de los ladrillos ecológicos en comparación con los ladrillos convencionales, son muy parecidos, aunque el ladrillo ecológico tiene muchas ventajas, por ejemplo, demostró tener buena resistencia a la humedad, resistencia al desgaste (no pierde sus propiedades con el tiempo y los cambios climáticos), estabilidad dimensional, barrera de gases y durabilidad</p>
+<h2 id="conclusi%C3%B3n">CONCLUSIÓN</h2>
+<p>El sector de la construcción es uno de los principales activos de la economía mundial y es indispensable para el progreso y el desarrollo de la sociedad, esto provoca que sea uno de los principales responsables de la contaminación y del cambio climático, por esta razón es necesario recurrir a mecanismos innovadores para aprovechar los residuos (en especial los plásticos).
+La automatización en la elaboración de ladrillos ecológicos para la construcción es una opción viable, técnica y económica en el aspecto de producción. Las ventas compensan favorablemente los costos de inversión aparte que se utiliza menos energía para producir los ladrillos ecológicos que un ladrillo convencional.
+Se automatizo el proceso en un 95%, esto se realizó a través de actuadores controlados por la tarjeta Arduino Uno y programados con lenguaje de Arduino. Esto logró desarrollar una idea competente para automatizar la elaboración de ladrillos ecológicos. Al hacer modificaciones en la elaboración, hace que sea más seguro para el personal, también hace que si se quiere modificar la forma que tomará el producto final sólo es cuestión de cambiar el molde. Se cumplió el objetivo general planteado anteriormente y se elaboró un prototipo final que cumple con las necesidades del sector de construcción y que es agradable para el planeta.</p>
+<h2 id="anexos">ANEXOS</h2>
+<p><a href="https://drive.google.com/file/d/10zrZ9TGiPM3d-yfwJjcX1YBgU9UHC8vV/view?usp=sharing">Anexo 1: Unidades económicas</a>
+<a href="https://drive.google.com/file/d/1ER9kxTNDJpYLz0OtkDG1aqWm4JVQAWmt/view?usp=sharing">Anexo 2: Tabla de propiedades del ladrillo ecológico</a></p>
+
+</body>
+</html>
